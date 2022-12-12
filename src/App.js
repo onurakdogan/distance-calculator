@@ -6,20 +6,20 @@ import { users} from './data/users';
 import { coordinates } from './data/office';
 import { calculateDistance } from './calculation/distanceCalculation';
 
-function App() {
+export default function App() {
 
 const [data,setData] = useState([]);
-  
-  useEffect(()=>{
-      list(users);
-  },[users])
-
+   
   const list = () => {
     users.map((item)=>{
       let distance = calculateDistance(coordinates.latitude,coordinates.longitude,item.latitude,item.longitude);
       distance <= 100 && setData(data => [...data, item]);
     })
   }
+
+   useEffect(()=>{
+      list(users);
+  },[])
  
   return (
     <div className="App">
@@ -32,5 +32,3 @@ const [data,setData] = useState([]);
     </div>
   );
 }
-
-export default App;
